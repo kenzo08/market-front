@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import process from 'node:process';
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   app: {
@@ -14,6 +15,7 @@ export default defineNuxtConfig({
       script: [],
     },
   },
+  css: ["~/assets/css/style.css"],
   nitro: {
     compressPublicAssets: true,
   },
@@ -21,7 +23,11 @@ export default defineNuxtConfig({
     options: {
       scrollBehaviorType: 'smooth',
     },
-  },  runtimeConfig: {
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  runtimeConfig: {
     public: {
       API_BASE_URL: process.env.NUXT_API_BASE,
 
