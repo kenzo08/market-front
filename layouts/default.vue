@@ -4,7 +4,7 @@
 <template>
   <div class="flex h-full min-h-screen flex-col">
   <Header/>
-  <div class="flex-auto container">
+  <div class="flex-auto">
     <slot />
   </div>
   <Footer/>

@@ -15,24 +15,31 @@ export default defineNuxtConfig({
       script: [],
     },
   },
+
   css: ["~/assets/css/style.css"],
+
   nitro: {
     compressPublicAssets: true,
   },
+
   router: {
     options: {
       scrollBehaviorType: 'smooth',
     },
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   runtimeConfig: {
     public: {
       API_BASE_URL: process.env.NUXT_API_BASE,
 
     },
   },
+
   compatibilityDate: '2025-05-15',
-  devtools: { enabled: true }
+  devtools: { enabled: true },
+  modules: ['@vueuse/nuxt']
 })

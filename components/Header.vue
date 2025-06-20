@@ -1,26 +1,31 @@
 <script setup lang="ts">
 
+import MenuCatalog from '~/components/main-page/MenuCatalog.vue';
 </script>
 
 <template>
-  <div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar z-50 glass shadow-lg sticky top-0">
     <div class="navbar-start">
       <div class="dropdown">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
-        </div>
-        <ul
-            tabindex="0"
-            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-          <li><a>Homepage</a></li>
-          <li><a>Portfolio</a></li>
-          <li><a>About</a></li>
-        </ul>
+        <MenuBurgerBtn  tabindex="0" class="btn btn-ghost btn-circle"/>
+        <MenuCatalog tabindex="0" class="dropdown-content mt-10 "/>
       </div>
+<!--      <div class="dropdown">-->
+<!--        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>-->
+<!--        </div>-->
+<!--        <ul-->
+<!--            tabindex="0"-->
+<!--            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-lg">-->
+<!--          <li><NuxtLink to="/">Homepage</NuxtLink></li>-->
+<!--          <li><NuxtLink>Portfolio</NuxtLink></li>-->
+<!--          <li><NuxtLink to="/about">About</NuxtLink></li>-->
+<!--        </ul>-->
+<!--      </div>-->
       <NuxtLink to="/" class="btn btn-ghost text-xl">Market</NuxtLink>
     </div>
     <input type="text" placeholder="Search" class="input input-bordered w-full" />
-    <div class="navbar-end">
+    <div class="navbar-end gap-4">
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
           <div class="indicator">
@@ -30,13 +35,13 @@
         </div>
         <div
             tabindex="0"
-            class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+            class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow-lg">
           <div class="card-body">
             <span class="text-lg font-bold">8 Items</span>
             <span class="text-info">Subtotal: $999</span>
-            <div class="card-actions">
+            <NuxtLink to="/cart" class="card-actions">
               <button class="btn btn-primary btn-block">View cart</button>
-            </div>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -50,7 +55,7 @@
         </div>
         <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-lg">
           <li>
             <a class="justify-between">
               Profile
@@ -61,8 +66,8 @@
           <li><a>Logout</a></li>
         </ul>
       </div>
+      <ThemeToggle />
     </div>
-    <ThemeToggle class="ml-4"/>
   </div>
 </template>
 
