@@ -3,9 +3,7 @@
 </script>
 
 <template>
-<h1>
-  Cart Page
-</h1>
+<h1>Slug</h1>
 </template>
 
 <style scoped>

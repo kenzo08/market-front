@@ -22,7 +22,7 @@ defineProps<Props>()
       <h2 class="card-title">Card Title</h2>
       <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
       <div class="card-actions justify-end">
-        <button class="btn btn-primary">Добавить в корзину</button>
+        <Button>Добавить в корзину</Button>
       </div>
     </div>
   </NuxtLink>

@@ -1,30 +1,62 @@
 <script setup lang="ts">
+import {useModal, useModalSlot} from 'vue-final-modal'
+import {LazyModalTemplate, LazyAuthSignup, LazyMenuCatalog, LazyMenuModalCatalog} from '#components';
+import {useLogged} from '~/composables/states';
 
-import MenuCatalog from '~/components/main-page/MenuCatalog.vue';
+const isOpen = ref<boolean>(false)
+const menuRef = ref(null)
+const isLogged = useLogged()
+const menuStore = useMenuStore()
+const { menuHeader } = storeToRefs(menuStore)
+
+onClickOutside(menuRef, () => {
+  if (isOpen.value)
+    isOpen.value = false
+})
+
+const modalInstance = useModal({
+  component: LazyModalTemplate,
+  slots: {
+    default: useModalSlot({
+      component: LazyAuthSignup,
+      attrs:{
+        onClose(){
+          modalInstance.close()
+        }
+      }
+    })
+  }
+})
+
+watch(isOpen, ()=>{
+  modalInstance.patchOptions(
+      {
+        component: LazyMenuModalCatalog,
+        slots: {
+          default: useModalSlot({
+            component: LazyMenuCatalog,
+            attrs:{
+              menu: menuHeader.value
+            },
+          }),
+        },
+      })
+
+  if (isOpen.value)
+    modalInstance.open()
+  else modalInstance.close()
+})
 </script>
 
 <template>
   <div class="navbar z-50 glass shadow-lg sticky top-0">
     <div class="navbar-start">
-      <div class="dropdown">
-        <MenuBurgerBtn  tabindex="0" class="btn btn-ghost btn-circle"/>
-        <MenuCatalog tabindex="0" class="dropdown-content mt-10 "/>
+      <div class="">
+        <MenuBurgerBtn  ref="menuRef" v-model="isOpen" />
       </div>
-<!--      <div class="dropdown">-->
-<!--        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>-->
-<!--        </div>-->
-<!--        <ul-->
-<!--            tabindex="0"-->
-<!--            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-lg">-->
-<!--          <li><NuxtLink to="/">Homepage</NuxtLink></li>-->
-<!--          <li><NuxtLink>Portfolio</NuxtLink></li>-->
-<!--          <li><NuxtLink to="/about">About</NuxtLink></li>-->
-<!--        </ul>-->
-<!--      </div>-->
-      <NuxtLink to="/" class="btn btn-ghost text-xl">Market</NuxtLink>
+      <NuxtLink to="/" class="btn btn-ghost text-xl">LocaFun</NuxtLink>
     </div>
-    <input type="text" placeholder="Search" class="input input-bordered w-full" />
+    <Input name="search" type="primary" placeholder="Поиск" />
     <div class="navbar-end gap-4">
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -33,9 +65,7 @@ import MenuCatalog from '~/components/main-page/MenuCatalog.vue';
             <span class="badge badge-sm indicator-item">8</span>
           </div>
         </div>
-        <div
-            tabindex="0"
-            class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow-lg">
+        <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow-lg">
           <div class="card-body">
             <span class="text-lg font-bold">8 Items</span>
             <span class="text-info">Subtotal: $999</span>
@@ -45,7 +75,7 @@ import MenuCatalog from '~/components/main-page/MenuCatalog.vue';
           </div>
         </div>
       </div>
-      <div class="dropdown dropdown-end">
+      <div v-if="isLogged" class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
             <img
@@ -66,6 +96,17 @@ import MenuCatalog from '~/components/main-page/MenuCatalog.vue';
           <li><a>Logout</a></li>
         </ul>
       </div>
+      <Button
+          v-else
+          type="primary"
+          icon-name="16x16/login"
+          icon-size="16"
+          @click="modalInstance.open"
+          is-outline
+          class="textarea-sm"
+      >
+      Войти
+      </Button>
       <ThemeToggle />
     </div>
   </div>

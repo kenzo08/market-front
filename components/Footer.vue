@@ -4,10 +4,10 @@
 
 <template>
   <footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
-    <nav class="grid grid-flow-col gap-4">
-      <NuxtLink to="/about" class="link link-hover">About us</NuxtLink>
-      <NuxtLink to="/contact" class="link link-hover">Contact</NuxtLink>
-      <NuxtLink to="/jobs" class="link link-hover">Jobs</NuxtLink>
+    <nav class="grid uppercase grid-flow-col gap-4">
+      <NuxtLink to="/about" class="link link-hover">О нас</NuxtLink>
+      <NuxtLink to="/contact" class="link link-hover">Контакы</NuxtLink>
+      <NuxtLink to="/jobs" class="link link-hover">Вакансии</NuxtLink>
     </nav>
     <nav>
       <div class="grid grid-flow-col gap-4">
@@ -47,7 +47,7 @@
       </div>
     </nav>
     <aside>
-      <p>Copyright © {{new Date().getFullYear()}} - All right reserved by ACME Industries Ltd</p>
+      <p>Copyright © {{new Date().getFullYear()}} - All right reserved by Loca LTD</p>
     </aside>
   </footer>
 </template>

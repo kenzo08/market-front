@@ -3,9 +3,7 @@
 </script>
 
 <template>
-<h1>
-  Cart Page
-</h1>
+<h1>Profile main</h1>
 </template>
 
 <style scoped>

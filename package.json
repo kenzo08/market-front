@@ -11,12 +11,22 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
+    "@pinia/nuxt": "0.11.1",
     "@tailwindcss/vite": "^4.1.10",
+    "@vee-validate/nuxt": "^4.15.1",
+    "@vee-validate/yup": "^4.15.1",
     "@vueuse/nuxt": "13.3.0",
     "daisyui": "^5.0.43",
+    "jwt-decode": "^4.0.0",
     "nuxt": "^3.17.5",
+    "nuxt-lucide-icons": "1.0.5",
+    "pinia": "^3.0.3",
     "tailwindcss": "^4.1.10",
-    "vue": "^3.5.16",
+    "vue": "^3.5.17",
+    "vue-final-modal": "^4.5.5",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "vite-svg-loader": "^5.1.0"
   }
 }
