@@ -14,45 +14,47 @@ onClickOutside(menuRef, () => {
     isOpen.value = false
 })
 
-const modalInstance = useModal({
+const authModal = useModal({
   component: LazyModalTemplate,
   slots: {
     default: useModalSlot({
       component: LazyAuthSignup,
       attrs:{
         onClose(){
-          modalInstance.close()
+          authModal.close()
         }
       }
     })
   }
 })
 
-watch(isOpen, ()=>{
-  modalInstance.patchOptions(
-      {
-        component: LazyMenuModalCatalog,
-        slots: {
-          default: useModalSlot({
-            component: LazyMenuCatalog,
-            attrs:{
-              menu: menuHeader.value
-            },
-          }),
-        },
-      })
+const menuModal =   useModal(
+    {
+      component: LazyMenuModalCatalog,
+      slots: {
+        default: useModalSlot({
+          component: LazyMenuCatalog,
+          attrs:{
+            menu: menuHeader.value
+          },
+        }),
+      },
+    })
 
-  if (isOpen.value)
-    modalInstance.open()
-  else modalInstance.close()
-})
+
+function toggleMenu(opened: boolean) {
+  if(opened)
+    menuModal.open()
+  else
+    menuModal.close()
+}
 </script>
 
 <template>
   <div class="navbar z-50 glass shadow-lg sticky top-0">
     <div class="navbar-start">
       <div class="">
-        <MenuBurgerBtn  ref="menuRef" v-model="isOpen" />
+        <MenuBurgerBtn  ref="menuRef" v-model="isOpen" @update:model-value="toggleMenu"/>
       </div>
       <NuxtLink to="/" class="btn btn-ghost text-xl">LocaFun</NuxtLink>
     </div>
@@ -101,7 +103,7 @@ watch(isOpen, ()=>{
           type="primary"
           icon-name="16x16/login"
           icon-size="16"
-          @click="modalInstance.open"
+          @click="authModal.open"
           is-outline
           class="textarea-sm"
       >
