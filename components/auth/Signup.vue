@@ -12,7 +12,6 @@ const tabs = ref(
 )
 
 const emit = defineEmits(['close'])
-const isLogged = useLogged()
 const activeTab = ref(tabs.value[0])
 const isLoading = ref(false)
 const schema = Yup.object().shape({
@@ -31,25 +30,35 @@ const onSubmit = handleSubmit(async (values) => {
   const { name, email, password, passwordRepeat } = values
   if (passwordRepeat!== password && activeTab.value.val === 'signup') {
     setFieldError('passwordRepeat', 'Пароли не совпадают')
-  }else {
-    isLoading.value = true
-    try {
-      const response = await useApiPost('/api/auth/signin', {
-        body: {
-          email,
-          password,
-        }
-      })
+    return
+  }
 
-      useSetTokens(response)
+  isLoading.value = true
+    try {
+      if (activeTab.value.val === 'login'){
+        const response = await useApiPost('/api/auth/signin', {
+          body: { email, password,}
+        })
+
+        useSetTokens(response)
+      }
+
+      if (activeTab.value.val === 'signup'){
+        const response = await useApiPost('/api/auth/signup', {
+          body: {
+            email,
+            password,
+          }
+        })
+        useSetTokens(response)
+      }
       emit('close')
     }catch (error) {
-      setFieldError('password', error._data.message)
+      setFieldError('password', error._data?.message)
       console.error(error)
     }finally {
       isLoading.value = false
     }
-  }
 })
 </script>
 

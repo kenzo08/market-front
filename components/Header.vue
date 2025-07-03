@@ -9,11 +9,6 @@ const isLogged = useLogged()
 const menuStore = useMenuStore()
 const { menuHeader } = storeToRefs(menuStore)
 
-onClickOutside(menuRef, () => {
-  if (isOpen.value)
-    isOpen.value = false
-})
-
 const authModal = useModal({
   component: LazyModalTemplate,
   slots: {
@@ -41,6 +36,14 @@ const menuModal =   useModal(
       },
     })
 
+
+onClickOutside(menuRef, () => {
+  if (isOpen.value){
+    menuModal.close()
+    isOpen.value = false
+
+  }
+})
 
 function toggleMenu(opened: boolean) {
   if(opened)
