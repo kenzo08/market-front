@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import {getAllProducts} from '~/composables/product';
+import {breakpointsTailwind} from '@vueuse/core';
 
+const { lg } = useBreakpoints(breakpointsTailwind)
 
 const { data } = await useAsyncData(()=>getAllProducts())
 
-console.log(data.value, 'lel')
 const products = [
   {
     url: '/product/slug1',
@@ -65,7 +66,7 @@ const products = [
           v-for="(product, index) in [...products, ...products, ...products]"
           is-swiper-img
           v-bind="product"
-          size="sm"
+          :size="lg ? 'md' : 'sm'"
           :key="index"
       />
     </div>
