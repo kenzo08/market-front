@@ -18,7 +18,24 @@ withDefaults(defineProps<Props>(),{
 <template>
   <button
       class="btn flex items-center justify-center"
-      :class="[`btn-${size} btn-${type}`, {'btn-active': isActive},  {'btn-outline': isOutline}]">
+      :class="[
+          {'btn-xs': size === 'xs'},
+          {'btn-sm': size === 'sm'},
+          {'btn-md': size === 'md'},
+          {'btn-lg': size === 'lg'},
+          {'btn-xl': size === 'xl'},
+          {'btn-primary': type === 'primary'},
+          {'btn-secondary': type === 'secondary'},
+          {'btn-success': type === 'success'},
+          {'btn-warning': type === 'warning'},
+          {'btn-error': type === 'error'},
+          {'btn-link': type === 'link'},
+          {'btn-info': type === 'info'},
+          {'btn-neutral': type === 'neutral'},
+          {'btn-accent': type === 'accent'},
+          {'btn-active': isActive},
+          {'btn-outline': isOutline}
+         ]">
     <span
         class="absolute self-center"
         :class="[

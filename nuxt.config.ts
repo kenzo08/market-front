@@ -66,8 +66,10 @@ export default defineNuxtConfig({
 
     },
   },
-
+  build: {
+    transpile: ['@vuepic/vue-datepicker']
+  },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@vueuse/nuxt', 'nuxt-lucide-icons', '@pinia/nuxt']
+  modules: ['@vueuse/nuxt', 'nuxt-lucide-icons', '@pinia/nuxt', 'nuxt-swiper']
 })
