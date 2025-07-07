@@ -6,9 +6,14 @@ interface Props {
   description: string;
   images: {src: string, active: boolean }[];
   url: string;
+  isSwiperImg?: boolean;
+  size?: 'xl' |'lg' | 'md' | 'sm' | 'xs'
 }
 
-const props =  defineProps<Props>();
+const props =  withDefaults(defineProps<Props>(), {
+  size: 'md',
+  isSwiperImg: false,
+});
 const slides = ref(props.images)
 
 function handleSwiper(el: Swiper){
@@ -18,19 +23,35 @@ function handleSwiper(el: Swiper){
 </script>
 
 <template>
-  <NuxtLink :to="url" class="card max-w-96 relative shadow-lg bg-base-300">
-    <figure class="max-h-50">
-      <swiper-container class="w-full h-50" :loop="true" :pagination="true" @swiperslidechange="handleSwiper">
+  <NuxtLink
+      :to="url"
+      class="card max-w-96 relative shadow-lg bg-base-300"
+      :class="[
+          {'card-xl ': size === 'xl'},
+          {'card-lg ': size === 'lg'},
+          {'card-md ': size === 'md'},
+          {'card-sm ': size === 'sm'},
+          {'card-xs ': size === 'xs'},
+      ]"
+  >
+    <figure :class="[
+        {'h-50': size === 'md'},
+        {'h-70': size === 'lg'},
+        ]">
+      <swiper-container v-if="isSwiperImg" class="w-full h-50 relative" :loop="true" :pagination="true" @swiperslidechange="handleSwiper">
         <swiper-slide v-for="(image, index) in slides" :key="index">
+          <div class="w-full h-full bg-base-200 flex absolute justify-center -z-1 items-center">
+            <span class="loading loading-spinner text-primary loading-xl"/>
+          </div>
           <img
-              v-if="index === 0 || image.active"
-              :src="image.src"
-              alt="Shoes"
+              :src="index === 0 || image.active ? image.src : ''"
+              alt="product"
               loading="lazy"
               class="object-cover h-full w-full"
           />
         </swiper-slide>
       </swiper-container>
+      <img v-else :src="slides[0].src" alt="product" class="w-full h-full object-cover" loading="lazy">
     </figure>
     <div class="card-body">
       <h2 class="card-title">{{title}}</h2>

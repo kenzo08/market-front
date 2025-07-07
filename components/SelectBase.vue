@@ -6,8 +6,9 @@ interface Props {
   type?: 'primary' | 'secondary' | 'accent' | 'neutral'
   items: {name: string, value: string| number}[]
 }
+
 withDefaults(defineProps<Props>(),{
-  type: 'primary',
+  type: 'neutral',
   size: 'md'
 })
 
@@ -20,7 +21,10 @@ watch(selected, (value) => {
 </script>
 
 <template>
-  <select v-model="selected" class="select" :class="[
+  <select
+      v-model="selected"
+      class="select border-gray-200 w-max"
+      :class="[
       {'select-xs': size === 'xs'},
       {'select-sm': size === 'sm'},
       {'select-md': size === 'md'},
@@ -33,7 +37,6 @@ watch(selected, (value) => {
       {'select-secondary': type === 'secondary'},
       {'select-accent': type === 'accent'},
       {'select-neutral': type === 'neutral'},
-      'w-max',
       ]">
     <option disabled :value="null">{{placeholder}}</option>
     <option v-for="item in items" :key="item.value" :value="item">
