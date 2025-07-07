@@ -1,43 +1,25 @@
 <script setup lang="ts">
-const theme = ref('light');
+const colorMode = useColorMode();
 
-const setTheme = (newTheme: string) => {
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  theme.value = newTheme;
-};
+const isDark = computed(()=>colorMode.preference === 'dark');
 
 const handleThemeChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  setTheme(target.checked ? 'dark' : 'light');
+  colorMode.preference = target.checked ? 'dark' : 'light'
 };
-
-onMounted(() => {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
-  });
-
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
-    setTheme(savedTheme);
-  } else {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(prefersDark ? 'dark' : 'light');
-  }
-});
 </script>
 
 <template>
   <label class="swap swap-rotate">
-    <input
-        type="checkbox"
-        class="theme-controller"
-        :value="theme"
-        @change="handleThemeChange"
-        :checked="theme === 'dark'"
-    />
+    <ClientOnly>
+      <input
+          type="checkbox"
+          class="theme-controller"
+          :value="isDark"
+          @change="handleThemeChange"
+          :checked="isDark"
+      />
+    </ClientOnly>
     <svg
         class="swap-off h-10 w-10 fill-current"
         xmlns="http://www.w3.org/2000/svg"

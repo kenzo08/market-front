@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import process from 'node:process';
-import tailwindcss from "@tailwindcss/vite";
 import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
@@ -24,9 +23,6 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-
-  css: ["~/assets/css/style.css", 'vue-final-modal/style.css'],
-
   nitro: {
     compressPublicAssets: true,
   },
@@ -36,10 +32,9 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth',
     },
   },
-
+  css: ["~/assets/css/style.css", 'vue-final-modal/style.css'],
   vite: {
       plugins: [
-        tailwindcss(),
         svgLoader({
           svgoConfig: {
             plugins: [
@@ -60,14 +55,28 @@ export default defineNuxtConfig({
       ],
   },
 
+  tailwindcss: { exposeConfig: true },
+  colorMode: {
+    dataValue: 'theme',
+    preference: 'system',
+    fallback: 'light',
+
+  },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.startsWith('swiper-'),
+    },
+  },
   runtimeConfig: {
     public: {
       BASE_API_URL: process.env.NUXT_API_BASE,
 
     },
   },
-
+  build: {
+    transpile: ['@vuepic/vue-datepicker']
+  },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@vueuse/nuxt', 'nuxt-lucide-icons', '@pinia/nuxt']
+  modules: ['@vueuse/nuxt', 'nuxt-lucide-icons', '@pinia/nuxt', 'nuxt-swiper', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode']
 })
