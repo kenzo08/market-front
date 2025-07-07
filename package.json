@@ -11,8 +11,9 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
+    "@nuxtjs/color-mode": "3.5.2",
+    "@nuxtjs/tailwindcss": "6.14.0",
     "@pinia/nuxt": "0.11.1",
-    "@tailwindcss/vite": "^4.1.10",
     "@vee-validate/nuxt": "^4.15.1",
     "@vee-validate/yup": "^4.15.1",
     "@vuepic/vue-datepicker": "^11.0.2",
@@ -23,7 +24,6 @@
     "nuxt-lucide-icons": "1.0.5",
     "nuxt-swiper": "2.0.1",
     "pinia": "^3.0.3",
-    "tailwindcss": "^4.1.10",
     "vue": "^3.5.17",
     "vue-final-modal": "^4.5.5",
     "vue-router": "^4.5.1"

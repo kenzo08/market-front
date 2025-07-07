@@ -34,25 +34,32 @@ function handleSwiper(el: Swiper){
           {'card-xs ': size === 'xs'},
       ]"
   >
-    <figure :class="[
-        {'h-35': size === 'sm'},
-        {'h-50': size === 'md'},
-        {'h-70': size === 'lg'},
+    <figure class="relative w-full" :class="[
+        {'h-[140px]': size === 'sm'},
+        {'h-[200px]': size === 'md'},
+        {'h-[280px]': size === 'lg'},
         ]">
-      <swiper-container v-if="isSwiperImg" class="w-full h-50 relative" :loop="true" :pagination="true" effect="cube" @swiperslidechange="handleSwiper">
-        <swiper-slide v-for="(image, index) in slides" :key="index">
+      <ClientOnly>
+        <swiper-container v-if="isSwiperImg" :slides-per-view="1" class="w-full h-[200px] relative" :loop="true" :pagination="true" effect="cube" @swiperslidechange="handleSwiper">
+          <swiper-slide v-for="(image, index) in slides" :key="index">
+            <div class="w-full h-full bg-base-200 flex absolute justify-center -z-1 items-center">
+              <span class="loading loading-spinner text-primary loading-xl"/>
+            </div>
+            <img
+                :src="index === 0 || image.active ? image.src : ''"
+                alt="product"
+                loading="lazy"
+                class="object-cover h-full w-full relative"
+            />
+          </swiper-slide>
+        </swiper-container>
+        <img v-else :src="slides[0].src" alt="product" class="w-full h-full object-cover" loading="lazy">
+        <template #fallback>
           <div class="w-full h-full bg-base-200 flex absolute justify-center -z-1 items-center">
             <span class="loading loading-spinner text-primary loading-xl"/>
           </div>
-          <img
-              :src="index === 0 || image.active ? image.src : ''"
-              alt="product"
-              loading="lazy"
-              class="object-cover h-full w-full"
-          />
-        </swiper-slide>
-      </swiper-container>
-      <img v-else :src="slides[0].src" alt="product" class="w-full h-full object-cover" loading="lazy">
+        </template>
+      </ClientOnly>
     </figure>
     <div class="card-body">
       <h2 class="card-title">{{title}}</h2>

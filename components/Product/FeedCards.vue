@@ -15,7 +15,7 @@ interface Product {
 }
 
 defineProps<Props>()
-const { lg } = useBreakpoints(breakpointsTailwind)
+const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 
 const swiperBreakpoints = {
   400:{
@@ -43,8 +43,9 @@ const swiperBreakpoints = {
   </h2>
   <swiper-container
       class="w-full flex h-auto gap-2 pb-10"
-      :slides-per-view="4.5"
+      slides-per-view="auto"
       :space-between="8"
+      mousewheel-force-to-axis="true"
       :breakpoints="swiperBreakpoints"
   >
     <swiper-slide v-for="(product, index) in products" :key="index" >

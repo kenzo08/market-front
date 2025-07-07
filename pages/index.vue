@@ -2,7 +2,7 @@
 import {getAllProducts} from '~/composables/product';
 import {breakpointsTailwind} from '@vueuse/core';
 
-const { lg } = useBreakpoints(breakpointsTailwind)
+const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 
 const { data } = await useAsyncData(()=>getAllProducts())
 

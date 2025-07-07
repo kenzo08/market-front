@@ -5,7 +5,7 @@ import {breakpointsTailwind} from '@vueuse/core';
 
 
 const date = ref();
-const { lg } = useBreakpoints(breakpointsTailwind)
+const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 const menuStore = useMenuStore()
 const { menuHeader } = storeToRefs(menuStore)
 

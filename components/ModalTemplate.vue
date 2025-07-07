@@ -15,7 +15,7 @@ interface Props {
 defineProps<Props>()
 defineEmits(['update:modelValue'])
 
-const { lg } = useBreakpoints(breakpointsTailwind)
+const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 </script>
 
 <template>
