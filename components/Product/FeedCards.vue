@@ -3,6 +3,7 @@ import {breakpointsTailwind} from '@vueuse/core';
 
 interface Props {
   products: Product[];
+  title?: string;
 }
 
 
@@ -39,16 +40,15 @@ const swiperBreakpoints = {
 
 <template>
   <h2 class="text-lg lg:text-2xl font-bold pb-4 uppercase pl-4">
-    Мы рекомендуем
+   {{title || ' Мы рекомендуем' }}
   </h2>
   <swiper-container
       class="w-full flex h-auto gap-2 pb-10"
-      slides-per-view="auto"
       :space-between="8"
       mousewheel-force-to-axis="true"
       :breakpoints="swiperBreakpoints"
   >
-    <swiper-slide v-for="(product, index) in products" :key="index" >
+    <swiper-slide v-for="(product, index) in products" :key="index" class="max-w-max">
       <ProductCard v-bind="product"  :size="lg ? 'lg' : 'sm'"/>
     </swiper-slide>
   </swiper-container>

@@ -23,13 +23,14 @@ const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
       :modal-id="modalId"
       :content-class="[
       transition === 'vfm-slide-right' ? 'max-h-[100%] h-full' : 'max-h-[80%]',
-      'fixed bottom-0 bg-base-300 flex w-full flex-col lg:right-0 lg:h-full lg:max-h-none lg:w-110',
+      'fixed bottom-0 shadow-2xl bg-base-300 flex w-full flex-col lg:right-0 lg:h-full lg:max-h-none lg:w-[440px]',
     ]"
       :hide-overlay="hideOverlay"
       :swipe-to-close="lg ? 'none' : 'down'"
       :content-transition="transition || (lg ? 'vfm-slide-right' : 'vfm-slide-down')"
       :background="interactive ? 'interactive' : 'non-interactive'"
       overlay-transition="vfm-fade"
+      overlay-class="glass"
       v-bind="$attrs"
       @update:model-value="val => $emit('update:modelValue', val)"
   >
