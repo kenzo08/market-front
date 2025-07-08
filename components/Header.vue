@@ -59,7 +59,9 @@ function toggleMenu(opened: boolean) {
       <div class="">
         <MenuBurgerBtn  ref="menuRef" v-model="isOpen" @update:model-value="toggleMenu"/>
       </div>
-      <NuxtLink to="/" class="btn btn-ghost text-md lg:text-xl">LocaFun</NuxtLink>
+      <NuxtLink to="/" class="btn btn-ghost gap-0 text-md lg:text-xl">Loca
+        <span class="text-primary">Fun</span>
+      </NuxtLink>
     </div>
     <Input name="search" type="primary" placeholder="Поиск" />
     <div class="navbar-end lg:gap-4 gap-1">
