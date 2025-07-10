@@ -48,8 +48,19 @@ function onInput(event: Event) {
         :placeholder="placeholder"
         class="input w-full focus:outline-none focus:bg-base-200"
         :class="[
-            `input-${size}`,
-            errorMessage ?  'input-error' :`input-${type}`
+            {'input-xs': size === 'xs'},
+            {'input-sm': size === 'sm'},
+            {'input-md': size === 'md'},
+            {'input-lg': size === 'lg'},
+            {'input-xl': size === 'xl'},
+            {'input-primary': type === 'primary'},
+            {'input-secondary': type === 'secondary'},
+            {'input-success': type === 'success'},
+            {'input-error': type === 'error'},
+            {'input-info': type === 'info'},
+            {'input-neutral': type === 'neutral'},
+            {'input-accent': type === 'accent'},
+            errorMessage &&  '!input-error'
         ]"
         @focus="$emit('focus')"
         @blur="onBlur"
@@ -60,7 +71,3 @@ function onInput(event: Event) {
     </p>
   </div>
 </template>
-
-<style scoped>
-
-</style>

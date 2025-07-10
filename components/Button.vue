@@ -7,16 +7,25 @@ interface Props {
   isLoading?: boolean
   iconName?: string
   iconSize?: string
+  to?: string
 }
 
-withDefaults(defineProps<Props>(),{
+const props = withDefaults(defineProps<Props>(),{
   type: 'primary',
   size: 'md'
+})
+
+const isLink = computed(() => {
+  if (props.to)
+    return resolveComponent('NuxtLink')
+  else return 'button'
 })
 </script>
 
 <template>
-  <button
+  <component
+      :is="isLink"
+      :to="to"
       class="btn flex items-center justify-center"
       :class="[
           {'btn-xs': size === 'xs'},
@@ -48,5 +57,5 @@ withDefaults(defineProps<Props>(),{
       <Icon v-if="iconName" :name="iconName" :size="iconSize"/>
       <slot />
     </div>
-  </button>
+  </component>
 </template>

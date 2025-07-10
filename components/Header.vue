@@ -2,12 +2,14 @@
 import {useModal, useModalSlot} from 'vue-final-modal'
 import {LazyModalTemplate, LazyAuthSignup, LazyMenuCatalog, LazyMenuModalCatalog} from '#components';
 import {useLogged} from '~/composables/states';
+import {breakpointsTailwind} from '@vueuse/core';
 
 const isOpen = ref<boolean>(false)
 const menuRef = ref(null)
 const isLogged = useLogged()
 const menuStore = useMenuStore()
 const { menuHeader } = storeToRefs(menuStore)
+const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 
 const authModal = useModal({
   component: LazyModalTemplate,
@@ -56,14 +58,12 @@ function toggleMenu(opened: boolean) {
 <template>
   <div class="navbar z-50 glass shadow-lg gap-1 sticky top-0">
     <div class="navbar-start">
-      <div class="">
-        <MenuBurgerBtn  ref="menuRef" v-model="isOpen" @update:model-value="toggleMenu"/>
-      </div>
+      <MenuBurgerBtn  ref="menuRef" v-model="isOpen" @update:model-value="toggleMenu"/>
       <NuxtLink to="/" class="btn btn-ghost gap-0 text-md lg:text-xl">Loca
         <span class="text-primary">Fun</span>
       </NuxtLink>
     </div>
-    <Input name="search" type="primary" placeholder="Поиск" />
+    <Input name="search" type="primary" :size="lg ? 'lg' : 'sm'" placeholder="Поиск" />
     <div class="navbar-end lg:gap-4 gap-1">
 <!--      <div class="dropdown dropdown-end">-->
 <!--        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">-->
@@ -105,9 +105,9 @@ function toggleMenu(opened: boolean) {
       </div>
       <Button
           v-else
-          type="primary"
           icon-name="16x16/login"
           icon-size="16"
+          :size="lg ? 'lg' : 'sm'"
           @click="authModal.open"
           is-outline
           class="textarea-sm"

@@ -43,7 +43,7 @@ const swiperBreakpoints = {
 
 <template>
   <div class="min-h-96">
-    <h2 class="text-lg lg:text-2xl font-bold pb-4 uppercase pl-4">
+    <h2 class="text-[16px] lg:text-[20px] font-bold pb-4 uppercase pl-4">
       {{title || ' Мы рекомендуем' }}
     </h2>
     <swiper-container

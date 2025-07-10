@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Breadcrumbs from '~/components/Breadcrumbs.vue';
+import {useModal, useModalSlot} from 'vue-final-modal';
+import {LazyModalTemplate, LazyProductPhotoFullScreen} from '#components';
 
 const route = useRoute()
 
@@ -45,13 +47,33 @@ const productData = ref({
     },
   ]
 })
+
+const photoModal = useModal({
+  component: LazyModalTemplate,
+  attrs: {
+    transition: 'vfm-slide-right',
+    containerWidth: '100%',
+    isHeightFull: true,
+  },
+  slots: {
+    default: useModalSlot({
+      component: LazyProductPhotoFullScreen,
+      attrs:{
+        images: productData.value.images,
+        onClose(){
+          photoModal.close()
+        }
+      }
+    })
+  }
+})
 </script>
 
 <template>
     <div class="container mx-auto px-4 pb-8">
       <Breadcrumbs class="pb-8 pt-4"/>
-      <div class="flex flex-wrap -mx-4">
-        <ProductPhotoBlock v-bind="productData"/>
+      <div class="flex gap-6 lg:flex-row flex-col">
+        <ProductPhotoBlock v-bind="productData" @handle-main-photo-click="photoModal.open"/>
         <ProductInfoBar v-bind="productData"/>
       </div>
     </div>

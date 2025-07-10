@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type Swiper from 'swiper';
+import {breakpointsTailwind} from '@vueuse/core';
 
 interface Props {
   title: string;
@@ -15,6 +16,7 @@ const props =  withDefaults(defineProps<Props>(), {
   isSwiperImg: false,
 });
 const slides = ref(props.images)
+const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 
 function handleSwiper(el: Swiper){
   const [swiper] = el.detail;
@@ -76,7 +78,8 @@ function handleSwiper(el: Swiper){
           4.9 (128 отзывов)
         </span>
       </div>
-      <div class="card-actions justify-end">
+      <div class="card-actions flex-nowrap justify-between">
+        <Button :icon-size="lg ? '24' : '16'" is-outline :icon-name="lg ?  '24x24/heart' : '16x16/heart'" :size="size" />
         <Button icon-size="16" icon-name="16x16/calendar-add" :size="size">
           Забронировать
         </Button>

@@ -61,7 +61,7 @@ const products = [
   <div class="my-10 flex flex-col">
     <BookingFilter class="mb-10 mx-auto px-4"/>
     <ProductFeedCards :products="[...products, ...products, ...products]"/>
-    <div class="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto gap-4">
+    <div class="grid lg:px-0 px-4  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto gap-4">
       <ProductCard
           v-for="(product, index) in [...products, ...products, ...products]"
           is-swiper-img

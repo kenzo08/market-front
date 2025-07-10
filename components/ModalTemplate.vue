@@ -7,12 +7,15 @@ interface Props {
   interactive?: boolean
   removeOverflow?: boolean
   modalId?: string
-  subtitleClass?: string
   transition?: 'vfm-fade' | 'vfm-slide-down' | 'vfm-slide-up' | 'vfm-slide-right' | 'vfm-slide-left'
   closeBtnStyle?: string
+  containerWidth?: string
+  isHeightFull?: string
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(),{
+  containerWidth: '440px'
+})
 defineEmits(['update:modelValue'])
 
 const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
@@ -21,12 +24,13 @@ const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 <template>
   <VueFinalModal
       :modal-id="modalId"
+      :content-style="{width: lg ? containerWidth : '100%'}"
       :content-class="[
       transition === 'vfm-slide-right' ? 'max-h-[100%] h-full' : 'max-h-[80%]',
-      'fixed bottom-0 shadow-2xl bg-base-300 flex w-full flex-col lg:right-0 lg:h-full lg:max-h-none lg:w-[440px]',
+      'fixed bottom-0 shadow-2xl bg-base-300 flex flex-col lg:right-0 lg:h-full lg:max-h-none',
     ]"
       :hide-overlay="hideOverlay"
-      :swipe-to-close="lg ? 'none' : 'down'"
+      :swipe-to-close="lg || transition !== 'vfm-slide-down' ? 'none' : 'down'"
       :content-transition="transition || (lg ? 'vfm-slide-right' : 'vfm-slide-down')"
       :background="interactive ? 'interactive' : 'non-interactive'"
       overlay-transition="vfm-fade"
@@ -43,7 +47,7 @@ const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
     >
       <Icon name="close" />
     </button>
-    <div class="w-full pb-10">
+    <div class="w-full" :class="{'h-full': isHeightFull}">
       <slot />
     </div>
   </VueFinalModal>
