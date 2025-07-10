@@ -21,7 +21,7 @@ const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
 
 const swiperBreakpoints = {
   350:{
-    slidesPerView: 1.7,
+    slidesPerView: 1.5,
   },
   500: {
     slidesPerView: 2.3,
