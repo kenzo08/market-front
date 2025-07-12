@@ -59,6 +59,11 @@ const minTime = {
 <template>
   <div class="flex flex-col container px-4 mx-auto py-10">
     <h1 class="text-2xl font-bold">Забронировать</h1>
+    <BookingSteps
+        :list="['Заполнение формы', 'Оплата', 'Подтверждение брони']"
+        :current-step="1"
+        class="my-5"
+    />
     <div class="flex lg:flex-row flex-col gap-6 pt-6">
       <BookingProductPreview v-bind="product" class="h-max mx-auto lg:mx-0"/>
 

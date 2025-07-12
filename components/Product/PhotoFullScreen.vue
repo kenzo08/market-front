@@ -16,7 +16,7 @@ function handleSwiper(el: Swiper){
 </script>
 
 <template>
-  <swiper-container :slides-per-view="1" class="size-full relative" :loop="true" :pagination="true" @swiperslidechange="handleSwiper">
+  <swiper-container :slides-per-view="1" :keyboard="true" :navigation="true" class="size-full relative" :loop="true" :pagination="true" @swiperslidechange="handleSwiper">
     <swiper-slide v-for="(image, index) in slides" :key="index">
       <div class="w-full h-full bg-base-200 flex absolute justify-center -z-1 items-center">
         <span class="loading loading-spinner text-primary loading-xl"/>

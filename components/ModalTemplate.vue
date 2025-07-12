@@ -42,7 +42,7 @@ const { lg } = useBreakpoints(breakpointsTailwind, { ssrWidth: 768 })
     <button
         aria-label="Закрыть"
         :style="closeBtnStyle ?? ''"
-        class="absolute right-2 top-2 z-10 flex size-6 items-center justify-center lg:right-2 lg:top-3 lg:size-10 lg:text-base-700"
+        class="absolute right-2 top-2 z-10 flex size-6 glass text-white shadow-2xl items-center justify-center lg:right-2 lg:top-3 lg:size-10 lg:text-base-700"
         @click="$emit('update:modelValue', false)"
     >
       <Icon name="close" />

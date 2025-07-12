@@ -29,7 +29,8 @@ function changeImage(src: Image) {
       <img v-for="img in images"
            :src="img.src"
            alt=""
-           class="size-16 sm:size-20 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-300"
+           class="size-16 sm:size-20 object-cover rounded-md hover:opacity-100 transition duration-300"
+           :class="{'opacity-60': img.src !== mainPhoto.src}"
            loading="lazy"
            @click="changeImage(img)">
     </div>

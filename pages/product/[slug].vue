@@ -76,6 +76,8 @@ const photoModal = useModal({
         <ProductPhotoBlock v-bind="productData" @handle-main-photo-click="photoModal.open"/>
         <ProductInfoBar v-bind="productData"/>
       </div>
+      <div class="divider my-6 lg:my-10"></div>
+      <ProductReviewBlock/>
     </div>
 </template>
 

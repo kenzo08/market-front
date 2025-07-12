@@ -10,7 +10,7 @@ import { VueFinalModal } from 'vue-final-modal'
       :esc-to-close="true"
   >
     <div class="flex flex-col h-full">
-      <div class="bg-base-300 drop-shadow-2xl  rounded-b-[50px]">
+      <div class="bg-base-300 drop-shadow-2xl lg:pb-10  rounded-b-[50px]">
         <slot />
       </div>
       <div class="w-full glass pointer-events-none -z-1 flex-1 -mt-10"/>
